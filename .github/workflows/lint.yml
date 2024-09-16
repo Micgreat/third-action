@@ -1,0 +1,46 @@
+name: lint, test, and build
+on: push
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: get code
+                uses: actions/checkout@v3
+            -   name: install NodeJs
+                uses: actions/setup-node@v3
+                with:
+                    node-version: 18
+            -   name: install dependencies
+                run: npm ci
+            -   name: run Eslint to check for errors and bugs
+                run: npm run lint
+    
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Get the code
+                uses: actions/checkout@v3
+            -   name: install NodeJs
+                uses: actions/setup-node@v3
+                with:
+                    node-version: 18
+            -   name: install the dependencies needed
+                run: npm ci
+            -   name: run test
+                run: npm run test
+        
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Get the code
+                uses: actions/checkout@v3
+            -   name: install NodeJs
+                uses: actions/setup-node@v3
+                with:
+                    node-version: 18
+            -   name: install the dependencies needed
+                run: npm ci
+            -   name: run test
+                run: npm run test
+            -   name: build the code
+                run: npm run build
